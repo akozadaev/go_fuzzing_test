@@ -18,6 +18,10 @@ func ParseURL(rawURL string) (scheme, host string, err error) {
 	scheme = rawURL[:colonIdx]
 	rest := rawURL[colonIdx+3:]
 
+	if scheme == "" {
+		return "", "", errors.New("empty scheme")
+	}
+
 	slashIdx := strings.Index(rest, "/")
 	if slashIdx == -1 {
 		host = rest
